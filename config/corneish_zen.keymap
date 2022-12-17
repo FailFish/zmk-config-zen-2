@@ -6,7 +6,7 @@
 #define DEFL 0
 #define NUML 1
 #define SYML 2
-#define ADJL 2
+#define ADJL 3
 
 &lt {
   tapping-term-ms = <150>;
@@ -35,12 +35,12 @@ ZMK_COMBO(paste, &kp C_AC_PASTE,  LB1 LB2, ALL)
 
 ZMK_COMBO(tilde, &kp TILDE,  LT3 LT4, DEFL)
 ZMK_COMBO(grave, &kp GRAVE,  LM3 LM4, DEFL)
-ZMK_COMBO(lbkt,  &kp LBKT,   LM0 LM1, DEFL)
-ZMK_COMBO(rbkt,  &kp RBKT,   LB0 LB1, DEFL)
-ZMK_COMBO(lbrc,  &kp LBRC,   LM1 LM2, DEFL)
-ZMK_COMBO(rbrc,  &kp RBRC,   LB1 LB2, DEFL)
-ZMK_COMBO(lpar,  &kp LPAR,   LM2 LM3, DEFL)
-ZMK_COMBO(rpar,  &kp RPAR,   LB2 LB3, DEFL)
+ZMK_COMBO(lbkt,  &kp LBKT,   LT0 LT1, DEFL)
+ZMK_COMBO(rbkt,  &kp RBKT,   LM0 LM1, DEFL)
+ZMK_COMBO(lbrc,  &kp LBRC,   LT1 LT2, DEFL)
+ZMK_COMBO(rbrc,  &kp RBRC,   LM1 LM2, DEFL)
+ZMK_COMBO(lpar,  &kp LPAR,   LT2 LT3, DEFL)
+ZMK_COMBO(rpar,  &kp RPAR,   LM2 LM3, DEFL)
 
 //right hand combo
 ZMK_COMBO(pipe,  &kp PIPE,   RM0 RM1, DEFL)
