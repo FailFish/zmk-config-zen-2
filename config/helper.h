@@ -7,7 +7,7 @@
         keymap { \
             compatible = "zmk,keymap"; \
             name { \
-                label = #_label;
+                label = #_label; \
                 bindings = <layout>; \
             }; \
         }; \
