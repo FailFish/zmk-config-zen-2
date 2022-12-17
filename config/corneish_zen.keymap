@@ -1,6 +1,12 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include "helper.h"
+
+#define DEFL 0
+#define NUML 1
+#define SYML 2
+#define ADJL 2
 
 / {
   chosen {
@@ -10,6 +16,10 @@
 };
 
 / {
+  &lt {
+    tapping-term-ms = <150>;
+  };
+
   conditional_layers {
     compatible = "zmk,conditional-layers";
     tri_layer {
@@ -17,67 +27,73 @@
       then-layer = <3>;
     };
   };
-  keymap {
-    compatible = "zmk,keymap";
 
-    default_layer {
-      label = "QWERTY";
-      // -----------------------------------------------------------------------------------------
-      // | TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
-      // | ESC |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-      // | F18 |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  |      |
-      //                    | CTRL| SHFT| LWR | RSE | GUI | ALT |
-      //                    |     |     | SPC | ENTR|     |     |
-      bindings = <
-        &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-        &kp ESC &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-        &kp F18 &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &trans
-        &kp LCTRL &kp LSHIFT &lt 1 SPACE &lt 2 ENTER &kp LGUI &kp LALT
-        >;
-    };
-    lower_layer {
-      label = "NUMBER";
-      // -----------------------------------------------------------------------------------------
-      // |      |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-      // |      | SHFT| ALT | CTRL| GUI |     |   | LFT | DWN |  UP | RGT |     |      |
-      // |  F11 | F1  | F2  | F3  | F4  | F5  |   | F6  | F7  | F8  | F9  | F10 | F12  |
-      //                    | CTRL| SHFT|     |   |     | GUI | ALT |
-      bindings = <
-        &trans &kp N1 &kp N2 &kp N3 &kp N4 &kp N5          &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-        &trans &kp LSHIFT &kp LALT &kp LCTRL &kp LGUI &trans   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-        &kp F11    &kp F1 &kp F2 &kp F3 &kp F4 &kp F5          &kp F6   &kp F7   &kp F8 &kp F9    &kp F10 &kp F12
-        &kp LCTRL &kp LSHIFT &trans &trans &kp LGUI &kp LALT
-        >;
-    };
 
-    raise_layer {
-      label = "SYMBOL";
-      // -----------------------------------------------------------------------------------------
-      // |      |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | DEL  |
-      // |      |  `  |  ~  |  (  |  {  |  [  |   |     | GUI | CTRL| ALT | SHFT|      |
-      // |      |     |     |  )  |  }  |  ]  |   | "|" |  -  |  =  |  +  |  \  |      |
-      //                    | CTRL| SHFT|  _  |   |     | GUI | ALT |
-      bindings = <
-        &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT    &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp DEL
-        &trans &kp GRAVE &kp TILDE &kp LPAR &kp LBRC &kp LBKT &trans &kp LGUI &kp LCTRL &kp LALT &kp RSHIFT &trans
-        &trans &trans   &trans &kp RPAR &kp RBRC &kp RBKT     &kp PIPE &kp MINUS &kp EQUAL &kp PLUS &kp BACKSLASH &trans
-        &kp LCTRL &kp LSHIFT &kp UNDER &trans &kp LGUI &kp LALT
-        >;
-    };
+  // left hand combo
+  ZMK_COMBO(copy,  &kp C_AC_COPY,   LB2 LB3, ALL)
+  ZMK_COMBO(paste, &kp C_AC_PASTE,  LB1 LB2, ALL)
 
-    adjust_layer {
-      label = "ADJUST";
-      // -----------------------------------------------------------------------------------------
-      // |      | BRI-| BRI+|     |lock |sleep|   | prev|pause/play| next | mute | vol- | vol+ |
-      // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |      |
-      // |      |     |     |     |     |     |   |     |     |     |     |     |      |
-      //                    |     |     |     |   |     |     |     |
-      bindings = <
-        &trans     &kp C_BRI_DN &kp C_BRI_UP &kp N3       &kp C_AL_LOCK &kp C_SLEEP &kp C_PREV &kp C_PP &kp C_NEXT &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP
-        &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &trans &trans &trans &trans &trans &trans
-        &trans     &trans       &trans       &trans       &trans       &trans         &trans &trans &trans &trans &trans &trans
-        &trans &trans &trans &trans &trans &trans
-        >;
-    };
-  };
+  ZMK_COMBO(tilde, &kp TILDE,  LT3 LT4, DEFL NUM SYM)
+  ZMK_COMBO(grave, &kp GRAVE,  LM3 LM4, DEFL NUM SYM)
+  ZMK_COMBO(lbkt,  &kp LBKT,   LM0 LM1, DEFL NUM SYM)
+  ZMK_COMBO(rbkt,  &kp RBKT,   LB0 LB1, DEFL NUM SYM)
+  ZMK_COMBO(lbrc,  &kp LBRC,   LM1 LM2, DEFL NUM SYM)
+  ZMK_COMBO(rbrc,  &kp RBRC,   LB1 LB2, DEFL NUM SYM)
+  ZMK_COMBO(lpar,  &kp LPAR,   LM2 LM3, DEFL NUM SYM)
+  ZMK_COMBO(rpar,  &kp RPAR,   LB2 LB3, DEFL NUM SYM)
+
+  //right hand combo
+  ZMK_COMBO(pipe,  &kp PIPE,   RM0 RM1, DEFL NUM SYM)
+  ZMK_COMBO(minus, &kp MINUS,  RM1 RM2, DEFL NUM SYM)
+  ZMK_COMBO(equal, &kp EQUAL,  RM2 RM3, DEFL NUM SYM)
+  ZMK_COMBO(plus,  &kp PLUS,   RB1 RB2, DEFL NUM SYM)
+  ZMK_COMBO(bslh,  &kp BSLH,   RM2 RB3, DEFL NUM SYM)
+
+  ZMK_LAYER(default_layer, QWERTY
+   // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+        &kp TAB       &kp Q         &kp W         &kp E         &kp R         &kp T             &kp Y         &kp U         &kp I         &kp O         &kp P         &kp BSPC
+   // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+        &kp ESC       &kp A         &kp S         &kp D         &kp F         &kp G             &kp H         &kp J         &kp K         &kp L         &kp SEMI      &kp SQT
+   // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+        &kp F18       &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH      ___
+   // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                                  &kp LCTRL     &kp LSHIFT    &lt 1 SPACE       &lt 2 ENTER   &kp LGUI      &kp LALT
+   //                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+  )
+
+  ZMK_LAYER(lower_layer, NUMBER
+   // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+        ___           &kp N1        &kp N2        &kp N3        &kp N4        &kp N5            &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &kp BSPC
+   // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+        ___           &kp LSHIFT    &kp LALT      &kp LCTRL     &kp LGUI      ___               &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT     ___           ___
+   // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+        &kp F11       &kp F1        &kp F2        &kp F3        &kp F4        &kp F5            &kp F6        &kp F7        &kp F8        &kp F9        &kp F10       &kp F12
+   // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                                  &kp LCTRL     &kp LSHIFT    ___               ___           &kp LGUI      &kp LALT
+   //                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+  )
+
+  ZMK_LAYER(raise_layer, SYMBOL
+   // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+        ___           &kp EXCL      &kp AT        &kp HASH      &kp DLLR      &kp PRCNT         &kp CARET     &kp AMPS      &kp STAR      &kp LPAR      &kp RPAR      &kp DEL
+   // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+        ___           &kp GRAVE     &kp TILDE     &kp LPAR      &kp LBRC      &kp LBKT          ___           &kp LGUI      &kp LCTRL     &kp LALT      &kp RSHIFT    ___
+   // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+        ___           ___           ___           &kp RPAR      &kp RBRC      &kp RBKT          &kp PIPE      &kp MINUS     &kp EQUAL     &kp PLUS      &kp BSLH      ___
+   // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                                  &kp LCTRL     &kp LSHIFT    &kp UNDER         ___           &kp LGUI      &kp LALT
+   //                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+  )
+
+  ZMK_LAYER(adjust_layer, ADJUST
+   // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+        ___           &kp C_BRI_DN  &kp C_BRI_UP  &kp N3        &kp C_AL_LOCK &kp C_SLEEP       &kp C_PREV    &kp C_PP      &kp C_NEXT    &kp C_MUTE    &kp C_VOL_DN  &kp C_VOL_UP
+   // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+        &bt BT_CLR    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      ___           ___           ___           ___           ___           ___
+   // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+        ___           ___           ___           ___           ___           ___               ___           ___           ___           ___           ___           ___
+   // ╰─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+                                                  ___           ___           ___               ___           ___           ___
+   //                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+  )
 };
