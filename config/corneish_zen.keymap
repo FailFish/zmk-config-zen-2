@@ -33,21 +33,21 @@
 ZMK_COMBO(copy,  &kp C_AC_COPY,   LB2 LB3, ALL)
 ZMK_COMBO(paste, &kp C_AC_PASTE,  LB1 LB2, ALL)
 
-ZMK_COMBO(tilde, &kp TILDE,  LT3 LT4, DEFL NUM SYM)
-ZMK_COMBO(grave, &kp GRAVE,  LM3 LM4, DEFL NUM SYM)
-ZMK_COMBO(lbkt,  &kp LBKT,   LM0 LM1, DEFL NUM SYM)
-ZMK_COMBO(rbkt,  &kp RBKT,   LB0 LB1, DEFL NUM SYM)
-ZMK_COMBO(lbrc,  &kp LBRC,   LM1 LM2, DEFL NUM SYM)
-ZMK_COMBO(rbrc,  &kp RBRC,   LB1 LB2, DEFL NUM SYM)
-ZMK_COMBO(lpar,  &kp LPAR,   LM2 LM3, DEFL NUM SYM)
-ZMK_COMBO(rpar,  &kp RPAR,   LB2 LB3, DEFL NUM SYM)
+ZMK_COMBO(tilde, &kp TILDE,  LT3 LT4, DEFL)
+ZMK_COMBO(grave, &kp GRAVE,  LM3 LM4, DEFL)
+ZMK_COMBO(lbkt,  &kp LBKT,   LM0 LM1, DEFL)
+ZMK_COMBO(rbkt,  &kp RBKT,   LB0 LB1, DEFL)
+ZMK_COMBO(lbrc,  &kp LBRC,   LM1 LM2, DEFL)
+ZMK_COMBO(rbrc,  &kp RBRC,   LB1 LB2, DEFL)
+ZMK_COMBO(lpar,  &kp LPAR,   LM2 LM3, DEFL)
+ZMK_COMBO(rpar,  &kp RPAR,   LB2 LB3, DEFL)
 
 //right hand combo
-ZMK_COMBO(pipe,  &kp PIPE,   RM0 RM1, DEFL NUM SYM)
-ZMK_COMBO(minus, &kp MINUS,  RM1 RM2, DEFL NUM SYM)
-ZMK_COMBO(equal, &kp EQUAL,  RM2 RM3, DEFL NUM SYM)
-ZMK_COMBO(plus,  &kp PLUS,   RB1 RB2, DEFL NUM SYM)
-ZMK_COMBO(bslh,  &kp BSLH,   RM2 RB3, DEFL NUM SYM)
+ZMK_COMBO(pipe,  &kp PIPE,   RM0 RM1, DEFL)
+ZMK_COMBO(minus, &kp MINUS,  RM1 RM2, DEFL)
+ZMK_COMBO(equal, &kp EQUAL,  RM2 RM3, DEFL)
+ZMK_COMBO(plus,  &kp PLUS,   RB1 RB2, DEFL)
+ZMK_COMBO(bslh,  &kp BSLH,   RM2 RB3, DEFL)
 
 ZMK_LAYER(default_layer, QWERTY,
  // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
